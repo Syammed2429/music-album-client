@@ -1,8 +1,10 @@
-import React from 'react';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import React, { FC } from 'react';
+import { Box, Button, Flex, Text, useColorMode } from '@chakra-ui/react';
 import { Link } from 'react-router-dom'
+import { BsMoonFill, BsSunFill } from 'react-icons/bs'
 
-const Navbar = () => {
+const Navbar: FC = () => {
+    const { colorMode, toggleColorMode } = useColorMode()
     return (
         <>
             <Box>
@@ -10,17 +12,31 @@ const Navbar = () => {
                     justify='center'
                     gap={10}
                 >
-                    <Text>
+
+
+                    <Text >
                         <Link to='/'>
                             Guest
                         </Link>
                     </Text>
 
-                    <Text>
+                    <Text
+                    >
                         <Link to='/artist'>
                             Artist Login
                         </Link>
                     </Text>
+                    {/* <Spacer /> */}
+                    <Box
+                        position='absolute'
+                        right='10'
+
+                    >
+                        <Button
+                            onClick={toggleColorMode}>
+                            {colorMode === 'light' ? <BsMoonFill /> : <BsSunFill />}
+                        </Button>
+                    </Box>
                 </Flex>
             </Box>
 
