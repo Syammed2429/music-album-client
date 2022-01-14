@@ -1,4 +1,4 @@
-import { Center, Box, SimpleGrid, Text } from '@chakra-ui/react'
+import { Center, Box, SimpleGrid, Text, Flex, Spinner } from '@chakra-ui/react'
 import React, { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 
 const AlbumDetails: FC = () => {
 
-    const [albums, setAlbums] = useState<string[] | any | null>(null)
+    const [album, setAlbum] = useState<string[] | any | null>(null)
 
     const { id } = useParams()
 
@@ -18,7 +18,7 @@ const AlbumDetails: FC = () => {
         const getById = async () => {
             const response = await fetch(`${BE}albums/${id}`)
             const results = await response.json();
-            setAlbums(results)
+            setAlbum(results)
         }
         getById()
     }, [BE, id]);
@@ -30,6 +30,15 @@ const AlbumDetails: FC = () => {
                     rounded='md'
 
                 >
+                    {/*SPinner */}
+                    {album === null ? (
+                        <Flex
+                            justify='center'
+                            alignItems='center'
+                        >
+                            <Spinner />
+                        </Flex>) : null}
+
                     <SimpleGrid
                         rows={{ sm: 1, md: 1 }}
                         spacing='8'
@@ -41,12 +50,12 @@ const AlbumDetails: FC = () => {
 
                     >
 
-                        <Text >Album Name : {albums?.name}</Text>
-                        <Text>Artist Name : {albums?.artist_name}</Text>
-                        <Text>Artist Name : {albums?.artist_name}</Text>
-                        <Text>Genre: {albums?.genre}</Text>
-                        <Text>Year: {albums?.year}</Text>
-                        <Text>Number of songs: {albums?.songs.length}</Text>
+                        <Text >Album Name : {album?.name}</Text>
+                        <Text>Artist Name : {album?.artist_name}</Text>
+                        <Text>Artist Name : {album?.artist_name}</Text>
+                        <Text>Genre: {album?.genre}</Text>
+                        <Text>Year: {album?.year}</Text>
+                        <Text>Number of songs: {album?.songs.length}</Text>
 
                     </SimpleGrid >
                 </Box>
