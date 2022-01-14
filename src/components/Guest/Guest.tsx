@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Guest: FC = () => {
-    const { colorMode, toggleColorMode } = useColorMode()
+    const { colorMode } = useColorMode()
 
 
     const [page, setPage] = useState<number>(1);
