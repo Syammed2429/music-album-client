@@ -5,6 +5,9 @@ import { Routes, Route } from 'react-router-dom'
 import { Artist } from '../Artist/Artist'
 import { Guest } from '../Guest/Guest'
 import { Navbar } from '../Navbar/Navbar'
+import { AlbumDetails } from '../AlbumDetails/AlbumDetails'
+
+
 
 const Router: FC = () => {
     return (
@@ -13,6 +16,7 @@ const Router: FC = () => {
             <Routes>
                 <Route path="/" element={<Guest />} />
                 <Route path="/artist" element={<Artist />} />
+                <Route path="/album-details/:id" element={<AlbumDetails />} />
             </Routes>
         </>
     )
