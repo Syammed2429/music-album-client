@@ -1,7 +1,6 @@
-import { Box, Button, Center, Flex, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, SimpleGrid, Spinner, Text } from '@chakra-ui/react';
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
 
 
 
@@ -43,6 +42,13 @@ const Guest: FC = () => {
                     rounded='md'
 
                 >
+                    {albums === null ? (
+                        <Flex
+                            justify='center'
+                            alignItems='center'
+                        >
+                            <Spinner />
+                        </Flex>) : null}
                     {albums?.map((e) => (
                         <SimpleGrid
                             columns={{ sm: 2, md: 6 }}
