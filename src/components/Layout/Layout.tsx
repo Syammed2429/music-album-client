@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
 
 
-import { Navbar } from '../Navbar/Navbar'
+import { Router } from '../Router/Router'
 
 
-const Layout = () => {
+const Layout: FC = () => {
     return (
         <>
-            <Navbar />
+            <Router />
         </>
     )
 }
