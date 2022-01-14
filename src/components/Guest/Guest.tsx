@@ -1,5 +1,6 @@
 import { Box, Button, Center, Flex, SimpleGrid, Text } from '@chakra-ui/react';
 import React, { FC, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -17,6 +18,8 @@ const Guest: FC = () => {
     }[] | null>(null)
 
     const BE: string | undefined = process.env.REACT_APP_BACKEND
+    const navigate = useNavigate()
+
 
     //Fetch the music album from the backend
     useEffect(() => {
@@ -31,15 +34,6 @@ const Guest: FC = () => {
     }, [BE, page]);
 
 
-    //Get the a particular albums
-    const getById = async (e: string | number) => {
-        console.log('string:', e)
-        const response = await fetch(`${BE}albums/${e}`)
-        const results = await response.json();
-        console.log('results:', results)
-
-
-    }
 
 
     return (
@@ -60,7 +54,7 @@ const Guest: FC = () => {
                             boxShadow='dark-lg'
                             key={e._id}
                             onClick={() => {
-                                getById(e._id)
+                                navigate(`/album-details/${e._id}`)
                             }}
                         >
                             <Text >Album Name : {e.name}</Text>
