@@ -1,10 +1,12 @@
-import { Box, Button, Center, Flex, SimpleGrid, Spinner, Text } from '@chakra-ui/react';
+import { Box, Button, Center, Flex, SimpleGrid, Spinner, Text, useColorMode } from '@chakra-ui/react';
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 
 
 const Guest: FC = () => {
+    const { colorMode, toggleColorMode } = useColorMode()
+
 
     const [page, setPage] = useState<number>(1);
     const [albums, setAlbums] = useState<{
@@ -36,6 +38,8 @@ const Guest: FC = () => {
 
 
     return (
+
+
         <>
             <Center py={10}>
                 <Box
@@ -56,7 +60,7 @@ const Guest: FC = () => {
                             p='10'
                             textAlign='center'
                             rounded='lg'
-                            color='gray.400'
+                            color={colorMode === 'light' ? 'black' : 'gray.400'}
                             boxShadow='dark-lg'
                             key={e._id}
                             onClick={() => {
