@@ -31,7 +31,7 @@ const Guest: FC = () => {
     }, [BE, page]);
 
 
-    //Get the a albums  particular 
+    //Get the a particular albums
     const getById = async (e: string | number) => {
         console.log('string:', e)
         const response = await fetch(`${BE}albums/${e}`)
