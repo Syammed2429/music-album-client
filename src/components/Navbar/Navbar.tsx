@@ -7,10 +7,13 @@ const Navbar: FC = () => {
     const { colorMode, toggleColorMode } = useColorMode()
     return (
         <>
-            <Box>
+            <Box
+                fontSize='3xl'
+                py={5}
+            >
                 <Flex
                     justify='center'
-                    gap={10}
+                    gap='12%'
                 >
 
 
