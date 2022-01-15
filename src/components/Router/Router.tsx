@@ -7,6 +7,8 @@ import { Guest } from '../Guest/Guest'
 import { Navbar } from '../Navbar/Navbar'
 import { AlbumDetails } from '../AlbumDetails/AlbumDetails'
 import { ArtistDashboard } from '../Artist/ArtistDashboard'
+import { Login } from '../Login/Login'
+import { Text } from '@chakra-ui/react'
 
 
 
@@ -19,6 +21,12 @@ const Router: FC = () => {
                 <Route path="/artist" element={<Artist />} />
                 <Route path="/album-details/:id" element={<AlbumDetails />} />
                 <Route path="/dashboard" element={<ArtistDashboard />} />
+                <Route path="/login" element={<Login />} />
+                <Route path='*' element={
+                    <>
+                        <Text>Not Found</Text>
+                    </>
+                } />
             </Routes>
         </>
     )
