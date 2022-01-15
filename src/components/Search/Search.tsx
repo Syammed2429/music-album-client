@@ -77,6 +77,7 @@ const Search: FC = () => {
                             rounded='lg'
                             color={colorMode === 'light' ? 'black' : 'gray.400'}
                             key={e._id}
+                            _hover={{ cursor: 'pointer' }}
                             onClick={() => {
                                 navigate(`/album-details/${e._id}`)
                             }}

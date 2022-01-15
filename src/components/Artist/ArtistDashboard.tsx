@@ -132,6 +132,7 @@ const ArtistDashboard: any = () => {
                             rounded='lg'
                             color={colorMode === 'light' ? 'black' : 'gray.400'}
                             boxShadow='dark-lg'
+                            _hover={{ cursor: 'pointer' }}
                             key={e._id}
                             onClick={() => {
                                 navigate(`/album-details/${e._id}`)

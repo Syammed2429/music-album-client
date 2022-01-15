@@ -67,6 +67,7 @@ const Guest: FC = () => {
                             color={colorMode === 'light' ? 'black' : 'gray.400'}
                             boxShadow='dark-lg'
                             key={e._id}
+                            _hover={{ cursor: 'pointer' }}
                             onClick={() => {
                                 navigate(`/album-details/${e._id}`)
                             }}
