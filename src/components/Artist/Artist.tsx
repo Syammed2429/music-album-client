@@ -1,3 +1,4 @@
+import { Box } from '@chakra-ui/react';
 import React from 'react';
 import { Navigate, } from 'react-router-dom'
 
@@ -9,12 +10,13 @@ import { ArtistDashboard } from './ArtistDashboard';
 
 const Artist: any = () => {
     const { currentUser } = useAuth()
-    console.log('currentUser:', !currentUser)
 
 
     return !currentUser ? <Navigate to="/login" /> : (
         <>
-            <ArtistDashboard />
+            <Box py={20}>
+                <ArtistDashboard />
+            </Box>
         </>
     )
 }
