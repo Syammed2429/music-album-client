@@ -8,7 +8,7 @@ const Navbar: FC = () => {
     return (
         <>
             <Box
-                fontSize='3xl'
+                fontSize={{ base: 'sm', md: '3xl' }}
                 py={5}
             >
                 <Flex
