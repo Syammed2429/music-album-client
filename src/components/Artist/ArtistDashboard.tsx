@@ -48,12 +48,13 @@ const ArtistDashboard: any = () => {
     }, [BE, artist, artistName]);
 
 
+
     //Logout func
     const handleLogOut = async () => {
         setError(null)
         try {
             await logout()
-            window.location.href = 'http://localhost:3000/login'
+            window.location.href = 'https://music-album-iota.vercel.app/login';
 
         } catch {
             setError('Failed to log out')
