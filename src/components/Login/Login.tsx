@@ -20,7 +20,7 @@ const Login: FC = () => {
             setError(null)
             setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value)
-            navigate('/admin')
+            navigate('/dashboard')
         } catch {
             setError('Failed to Log In check your password and email')
         }
