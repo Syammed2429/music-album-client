@@ -1,6 +1,7 @@
 import { Box, Button, Center, Flex, SimpleGrid, Spinner, Text, useColorMode } from '@chakra-ui/react';
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { Search } from '../Search/Search';
 
 
 
@@ -53,6 +54,9 @@ const Guest: FC = () => {
                         >
                             <Spinner />
                         </Flex>) : null}
+
+                    <Search />
+
                     {albums?.map((e) => (
                         <SimpleGrid
                             columns={{ sm: 2, md: 6 }}
