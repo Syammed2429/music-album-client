@@ -52,7 +52,6 @@ const AlbumDetails: FC = () => {
 
                         <Text >Album Name : {album?.name}</Text>
                         <Text>Artist Name : {album?.artist_name}</Text>
-                        <Text>Artist Name : {album?.artist_name}</Text>
                         <Text>Genre: {album?.genre}</Text>
                         <Text>Year: {album?.year}</Text>
                         <Box>Songs: {album?.songs.map((e: any) => (
