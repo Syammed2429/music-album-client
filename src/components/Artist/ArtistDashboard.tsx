@@ -1,5 +1,5 @@
 import { SimpleGrid, useColorMode, Text, Center, Box, Flex, Spinner, Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { FiChevronDown, FiLogOut } from 'react-icons/fi'
 import { RiUserSettingsLine } from 'react-icons/ri'
@@ -105,7 +105,7 @@ const ArtistDashboard: any = () => {
                 </Menu>
 
             </Flex>
-
+            {error}
 
             <Text>Welcome {artist}</Text>
 
