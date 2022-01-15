@@ -59,7 +59,7 @@ const Guest: FC = () => {
 
                     {albums?.map((e) => (
                         <SimpleGrid
-                            columns={{ sm: 2, md: 6 }}
+                            columns={{ sm: 2, md: 5 }}
                             spacing='8'
                             p='10'
                             textAlign='center'
@@ -72,7 +72,6 @@ const Guest: FC = () => {
                             }}
                         >
                             <Text >Album Name : {e.name}</Text>
-                            <Text>Artist Name : {e.artist_name}</Text>
                             <Text>Artist Name : {e.artist_name}</Text>
                             <Text>Genre: {e.genre}</Text>
                             <Text>Year: {e.year}</Text>
