@@ -12,7 +12,6 @@ import {
 } from '@chakra-ui/react'
 
 import { Link, useNavigate, } from "react-router-dom"
-
 import { useAuth } from "../../contexts/AuthContext"
 
 const UpdateProfile = () => {
@@ -43,7 +42,7 @@ const UpdateProfile = () => {
 
         Promise.all(promises)
             .then(() => {
-                navigate("/")
+                navigate("/artist")
             })
             .catch(() => {
                 setError("Failed to update account")
@@ -74,6 +73,7 @@ const UpdateProfile = () => {
                                     ref={emailRef}
                                     required
                                     defaultValue={currentUser.email}
+                                    placeholder="Enter the email address"
                                 />
                             </FormControl>
                             <FormControl id="password">
@@ -92,7 +92,7 @@ const UpdateProfile = () => {
                                     placeholder="Leave blank to keep the same"
                                 />
                             </FormControl>
-                            <Button disabled={loading} className="w-100" type="submit">
+                            <Button disabled={loading} type="submit">
                                 Update
                             </Button>
                         </FormControl>
