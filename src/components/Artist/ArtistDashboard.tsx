@@ -107,7 +107,12 @@ const ArtistDashboard: any = () => {
             </Flex>
             {error}
 
-            <Text>Welcome {artist}</Text>
+            <Text
+                color="#81E6D9"
+                fontSize='2xl'
+            >
+                Welcome {artist}
+            </Text>
 
             <Center py={10}>
                 <Box
