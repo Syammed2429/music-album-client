@@ -1,10 +1,12 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 import { useAuth } from '../../contexts/AuthContext'
 
 
 const ArtistDashboard: FC = () => {
     const { currentUser } = useAuth()
+    const [artistAlbum, setArtistAlbum] = useState<string[] | null>(null)
+
     const BE: string | undefined = process.env.REACT_APP_BACKEND
 
     //Taking the current user and splitting it to fetch the artist album
@@ -19,7 +21,7 @@ const ArtistDashboard: FC = () => {
         const getArtistData = async () => {
             const response = await fetch(`${BE}albums/artist?name=${artist}`)
             const results = await response.json();
-            console.log('results:', results)
+            setArtistAlbum(results)
 
         }
         getArtistData()
