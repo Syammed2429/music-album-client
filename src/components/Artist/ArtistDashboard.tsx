@@ -5,12 +5,26 @@ import { useAuth } from '../../contexts/AuthContext'
 
 const ArtistDashboard: FC = () => {
     const { currentUser } = useAuth()
+    const BE: string | undefined = process.env.REACT_APP_BACKEND
+
+    //Taking the current user and splitting it to fetch the artist album
     const artistName: string = currentUser.email.split('@')[0];
-    console.log('artistName:', artistName)
+    const spliceArtistName: string = artistName.split('').splice(1).join('')
+    const artist: string = artistName.split('')[0].toUpperCase() + spliceArtistName
 
-    // useEffect(() => {
 
-    // });
+    useEffect(() => {
+
+        //Fetching the artist music album
+        const getArtistData = async () => {
+            const response = await fetch(`${BE}albums/artist?name=${artist}`)
+            const results = await response.json();
+            console.log('results:', results)
+
+        }
+        getArtistData()
+
+    }, [BE, artist, artistName]);
 
     return (
         <>
