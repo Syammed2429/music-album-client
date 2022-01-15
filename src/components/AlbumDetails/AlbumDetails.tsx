@@ -55,7 +55,15 @@ const AlbumDetails: FC = () => {
                         <Text>Artist Name : {album?.artist_name}</Text>
                         <Text>Genre: {album?.genre}</Text>
                         <Text>Year: {album?.year}</Text>
-                        <Text>Number of songs: {album?.songs.length}</Text>
+                        <Box>Songs: {album?.songs.map((e: any) => (
+                            <Flex
+                                justify='center'
+                                gap={3}
+                                key={e._id}>
+                                <Text>Song name : {e.name},</Text>
+                                <Text>Song duration :{e.duration}</Text>
+                            </Flex>
+                        ))}</Box>
 
                     </SimpleGrid >
                 </Box>
@@ -66,3 +74,4 @@ const AlbumDetails: FC = () => {
 }
 
 export { AlbumDetails }
+
