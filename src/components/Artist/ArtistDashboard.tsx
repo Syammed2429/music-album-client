@@ -2,11 +2,11 @@ import { SimpleGrid, useColorMode, Text, Center, Box, Flex, Spinner, Button, Men
 import React, { FC, useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { FiChevronDown, FiLogOut } from 'react-icons/fi'
+import { RiUserSettingsLine } from 'react-icons/ri'
 
 
 
 import { useAuth } from '../../contexts/AuthContext'
-import { UpdateProfile } from '../UpdateProfile/UpdateProfile'
 
 
 const ArtistDashboard: any = () => {
@@ -64,35 +64,47 @@ const ArtistDashboard: any = () => {
     return !currentUser ? <Navigate to="/login" /> : (
         <>
 
+            <Flex
+                justify='flex-end'
+                mr={10}
+            >
 
-            <Menu>
-                {({ isOpen }) => (
-                    <>
-                        <MenuButton
-                            px={4}
-                            py={2}
-                            transition='all 0.2s'
-                            borderRadius='md'
-                            borderWidth='1px'
-                            _hover={{ bg: 'gray.400' }}
-                            _expanded={{ bg: 'red.400' }}
-                            _focus={{ boxShadow: 'outline' }}
-                            isActive={isOpen} as={Button} rightIcon={<FiChevronDown />}>
-                            {isOpen ? 'Close' : 'Open'}
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem>Download</MenuItem>
-                            <MenuItem
-                                _hover={{ bg: 'red.400' }}
+                <Menu>
+                    {({ isOpen }) => (
+                        <>
+                            <MenuButton
+                                px={4}
+                                py={2}
+                                transition='all 0.2s'
+                                borderRadius='md'
+                                borderWidth='1px'
+                                _hover={{ bg: 'gray.400' }}
+                                _expanded={{ bg: 'red.400' }}
+                                _focus={{ boxShadow: 'outline' }}
+                                isActive={isOpen} as={Button} rightIcon={<FiChevronDown />}>
+                                {isOpen ? 'Close' : 'Menu'}
+                            </MenuButton>
+                            <MenuList>
+                                <MenuItem
+                                    onClick={() => {
+                                        navigate('/update-profile')
+                                    }}>
+                                    Update Profile
+                                    <RiUserSettingsLine style={{ marginLeft: "10px" }} />
+                                </MenuItem>
+                                <MenuItem
+                                    _hover={{ bg: 'red.400' }}
 
-                                onClick={handleLogOut}>
-                                Log out
-                                <FiLogOut style={{ marginLeft: "10px" }} />
-                            </MenuItem>
-                        </MenuList>
-                    </>
-                )}
-            </Menu>
+                                    onClick={handleLogOut}>
+                                    Log out
+                                    <FiLogOut style={{ marginLeft: "10px" }} />
+                                </MenuItem>
+                            </MenuList>
+                        </>
+                    )}
+                </Menu>
+
+            </Flex>
 
 
             <Text>Welcome {artist}</Text>
@@ -136,7 +148,6 @@ const ArtistDashboard: any = () => {
                     ))}
                 </Box>
             </Center>
-            {/* <UpdateProfile /> */}
 
 
         </>
