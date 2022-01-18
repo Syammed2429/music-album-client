@@ -116,8 +116,10 @@ const Guest: FC = () => {
                 {arr.map((e) => (
                     <Box key={e}>
                         <Button
-                            onClick={() => setPage(prev => prev + 1)}
-                            disabled={page === arr.length}
+                            onClick={() => {
+                                setPage(e)
+                            }}
+                        // disabled={prev = prev}
 
                         >{e}</Button>
                     </Box>
