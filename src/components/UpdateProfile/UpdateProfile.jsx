@@ -7,6 +7,7 @@ import {
     Button,
     Input,
     AlertIcon,
+    Box,
 
 
 } from '@chakra-ui/react'
@@ -56,7 +57,7 @@ const UpdateProfile = () => {
         <>
             <Container>
                 <Container>
-                    <h2 className="text-center mb-4">Update Profile</h2>
+                    <h2 className="text-center mb-4">Update Password</h2>
                     {error &&
                         <Alert status='error'>
                             <AlertIcon />
@@ -68,13 +69,12 @@ const UpdateProfile = () => {
                         <FormControl >
                             <FormControl id="email">
                                 <FormControl>Email</FormControl>
-                                <Input
+                                {/* <Input
                                     type="email"
                                     ref={emailRef}
-                                    required
                                     defaultValue={currentUser.email}
                                     placeholder="Enter the email address"
-                                />
+                                /> */}
                             </FormControl>
                             <FormControl id="password">
                                 <FormLabel>Password</FormLabel>
@@ -100,9 +100,9 @@ const UpdateProfile = () => {
 
                 </Container>
             </Container>
-            <div className="w-100 text-center mt-2">
+            <Box my={2}>
                 <Link to="/dashboard">Cancel</Link>
-            </div>
+            </Box>
         </>
     )
 }
