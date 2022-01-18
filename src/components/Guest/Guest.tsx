@@ -1,6 +1,8 @@
 import { Box, Button, Center, Flex, SimpleGrid, Spinner, Text, useColorMode } from '@chakra-ui/react';
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+
+
 import { Search } from '../Search/Search';
 
 
@@ -18,10 +20,14 @@ const Guest: FC = () => {
         year: number,
         songs: string[],
     }[] | null>(null)
+    const [pages, setPages] = useState(0)
+
+
 
     const BE: string | undefined = process.env.REACT_APP_BACKEND
     const navigate = useNavigate()
 
+    let arr: number[] = []
 
     //Fetch the music album from the backend
     useEffect(() => {
@@ -29,12 +35,21 @@ const Guest: FC = () => {
             const response = await fetch(`${BE}albums?page=${page}`);
             const results = await response.json();
             setAlbums(results.albums)
+            setPages(results.totalPages)
 
         }
 
-        getData()
-    }, [BE, page]);
 
+        getData()
+    }, [BE, page, pages]);
+
+
+    for (let i = 1; i <= pages; i++) {
+        // console.log("i", i);
+        arr.push(i)
+
+
+    }
 
 
 
@@ -83,21 +98,37 @@ const Guest: FC = () => {
                 </Box>
             </Center>
             <Flex
-                justify="space-around"
+                justify="center"
+                my={5}
+                gap={2}
+                alignItems="center"
+
 
             >
-
+                <Text>Total Pages : {pages}</Text>
                 <Button
                     onClick={() => setPage(prev => prev - 1)}
                     disabled={page === 1}
                 >
                     Prev
                 </Button>
+
+                {arr.map((e) => (
+                    <Box key={e}>
+                        <Button
+                            onClick={() => setPage(prev => prev + 1)}
+                            disabled={page === arr.length}
+
+                        >{e}</Button>
+                    </Box>
+                ))}
+
                 <Button
-                    disabled={albums?.length === 0}
+                    disabled={page === arr.length}
                     onClick={() => setPage(prev => prev + 1)}>
                     Next
                 </Button>
+
             </Flex>
 
         </>
