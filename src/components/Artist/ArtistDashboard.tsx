@@ -1,4 +1,4 @@
-import { SimpleGrid, useColorMode, Text, Center, Box, Flex, Spinner, Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
+import { SimpleGrid, Image, useColorMode, Text, Center, Box, Flex, Spinner, Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { FiChevronDown, FiLogOut } from 'react-icons/fi'
@@ -17,6 +17,7 @@ const ArtistDashboard: any = () => {
         artist_name: string,
         genre: string,
         year: number,
+        album_image: string,
         songs: string[]
 
     }[] | null>(null)
@@ -128,31 +129,52 @@ const ArtistDashboard: any = () => {
                             <Spinner />
                         </Flex>) : null}
 
+                    <Center
+                        margin='auto'
 
-                    {artistAlbum?.map((e) => (
-                        <SimpleGrid
-                            columns={{ sm: 2, md: 5 }}
+                    >
+                        <Flex
+                            flexDirection={{ base: 'column', sm: 'row' }}
+                            gap={5}
+                            // justify={{ sm: 'center' }}
+                            // columns={{ sm: 2, md: 2, lg: 5 }}
                             spacing='8'
-                            p='10'
-                            textAlign='center'
-                            rounded='lg'
-                            color={colorMode === 'light' ? 'black' : 'gray.400'}
-                            boxShadow='dark-lg'
-                            _hover={{ cursor: 'pointer' }}
-                            key={e._id}
-                            onClick={() => {
-                                navigate(`/album-details/${e._id}`)
-                            }}
 
                         >
-                            <Text >Album Name : {e.name}</Text>
-                            <Text>Artist Name : {e.artist_name}</Text>
-                            <Text>Genre: {e.genre}</Text>
-                            <Text>Year: {e.year}</Text>
-                            <Text>Number of songs: {e.songs.length}</Text>
+                            {artistAlbum === null ? (
+                                <Text>No data</Text>
+                            ) : null}
+                            {artistAlbum?.map((e) => (
+                                <SimpleGrid
+                                    spacing='3'
+                                    p='10'
+                                    textAlign='center'
+                                    rounded='lg'
+                                    color={colorMode === 'light' ? 'black' : 'gray.400'}
+                                    boxShadow='dark-lg'
+                                    key={e._id}
+                                    _hover={{ cursor: 'pointer' }}
+                                    onClick={() => {
+                                        navigate(`/album-details/${e._id}`)
+                                    }}
+                                >
+                                    <Center>
 
-                        </SimpleGrid >
-                    ))}
+                                        <Image
+                                            boxSize='150px'
+                                            objectFit='cover'
+                                            src={e.album_image} />
+                                    </Center>
+                                    <Text >Album Name : {e.name}</Text>
+                                    <Text>Artist Name : {e.artist_name}</Text>
+                                    <Text>Genre: {e.genre}</Text>
+                                    <Text>Year: {e.year}</Text>
+                                    <Text>Number of songs: {e.songs.length}</Text>
+
+                                </SimpleGrid >
+                            ))}
+                        </Flex>
+                    </Center>
                 </Box>
             </Center>
 
