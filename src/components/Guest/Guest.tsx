@@ -10,8 +10,6 @@ import {
     Spinner,
     Text,
     useColorMode,
-    Stack,
-    Checkbox
 } from '@chakra-ui/react';
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
@@ -48,7 +46,6 @@ const Guest: FC = () => {
     const [pages, setPages] = useState(0)
     const [genre, setGenre] = useState<string | null>(null)
     const [year, setYear] = useState<number | null>(null)
-    const [value, setValue] = useState('1')
 
 
     const BE: string | undefined = process.env.REACT_APP_BACKEND
