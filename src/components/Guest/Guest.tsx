@@ -1,4 +1,18 @@
-import { Box, Button, Center, Flex, SimpleGrid, Spinner, Text, useColorMode } from '@chakra-ui/react';
+import {
+    Box,
+    Button,
+    Center,
+    Container,
+    Flex,
+    Image,
+    Select,
+    SimpleGrid,
+    Spinner,
+    Text,
+    useColorMode,
+    Stack,
+    Checkbox
+} from '@chakra-ui/react';
 import React, { FC, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
@@ -19,9 +33,22 @@ const Guest: FC = () => {
         genre: string,
         year: number,
         songs: string[],
+        album_image: string
+    }[] | null>(null)
+
+    const [allAlbumsData, setAllAlbumsData] = useState<{
+        _id: string | number,
+        name: string,
+        artist_name: string,
+        genre: string,
+        year: number,
+        songs: string[],
+        album_image: string
     }[] | null>(null)
     const [pages, setPages] = useState(0)
-
+    const [genre, setGenre] = useState<string | null>(null)
+    const [year, setYear] = useState<number | null>(null)
+    const [value, setValue] = useState('1')
 
 
     const BE: string | undefined = process.env.REACT_APP_BACKEND
@@ -39,25 +66,87 @@ const Guest: FC = () => {
 
         }
 
+        const getAllAlbumsData = async () => {
+            const response = await fetch(`${BE}albums/allalbums`);
+            const results = await response.json();
+            setAllAlbumsData(results)
+
+        }
+        getAllAlbumsData()
 
         getData()
     }, [BE, page, pages]);
 
 
     for (let i = 1; i <= pages; i++) {
-        // console.log("i", i);
         arr.push(i)
+    }
+
+    const sortByYear = (val: string) => {
+        const num: number = +val
+        setYear(num)
+        if (!val) return
+
+        if (genre) {
+            const data: any = allAlbumsData?.filter(e => e.year === num && e.genre === genre)
+            setAlbums(data)
+
+        } else {
+            const data: any = allAlbumsData?.filter(e => e.year === num)
+            setAlbums(data)
+
+        }
 
 
     }
 
+    const sortByGenre = (val: string) => {
+        if (!val) return
+        setGenre(val)
+
+        if (year) {
+            const data: any = allAlbumsData?.filter(e => e.year === year && e.genre === val)
+            setAlbums(data)
+
+        } else {
+            const data: any = allAlbumsData?.filter(e => e.genre === val)
+            setAlbums(data)
+
+        }
+
+    }
 
 
     return (
 
 
         <>
+
+            <Container>
+
+                <Select placeholder='Sort By Date'
+                    onChange={(e: any) => sortByYear(e.target.value)}
+
+                >
+                    <option value='2019'>2019</option>
+                    <option value='2020'>2020</option>
+                    <option value='2022'>2022</option>
+                </Select>
+
+
+
+                <Select placeholder='Sort By Genre'
+                    onChange={(e: any) => sortByGenre(e.target.value)}
+
+                >
+                    <option value='pop'>Pop</option>
+                    <option value='Rock'>Rock</option>
+                    <option value='Jazz'>Jazz</option>
+                </Select>
+            </Container>
+
             <Center py={10}>
+
                 <Box
                     rounded='md'
 
@@ -72,29 +161,49 @@ const Guest: FC = () => {
 
                     <Search />
 
-                    {albums?.map((e) => (
-                        <SimpleGrid
-                            columns={{ sm: 2, md: 5 }}
-                            spacing='8'
-                            p='10'
-                            textAlign='center'
-                            rounded='lg'
-                            color={colorMode === 'light' ? 'black' : 'gray.400'}
-                            boxShadow='dark-lg'
-                            key={e._id}
-                            _hover={{ cursor: 'pointer' }}
-                            onClick={() => {
-                                navigate(`/album-details/${e._id}`)
-                            }}
-                        >
-                            <Text >Album Name : {e.name}</Text>
-                            <Text>Artist Name : {e.artist_name}</Text>
-                            <Text>Genre: {e.genre}</Text>
-                            <Text>Year: {e.year}</Text>
-                            <Text>Number of songs: {e.songs.length}</Text>
+                    <Box
+                        margin='auto'
 
-                        </SimpleGrid >
-                    ))}
+                    >
+                        <SimpleGrid
+                            columns={{ sm: 2, md: 3, lg: 5 }}
+                            spacing='8'
+
+                        >
+                            {albums === null ? (
+                                <Text>No data</Text>
+                            ) : null}
+                            {albums?.map((e) => (
+                                <SimpleGrid
+                                    spacing='3'
+                                    p='10'
+                                    textAlign='center'
+                                    rounded='lg'
+                                    color={colorMode === 'light' ? 'black' : 'gray.400'}
+                                    boxShadow='dark-lg'
+                                    key={e._id}
+                                    _hover={{ cursor: 'pointer' }}
+                                    onClick={() => {
+                                        navigate(`/album-details/${e._id}`)
+                                    }}
+                                >
+                                    <Center>
+
+                                        <Image
+                                            boxSize='150px'
+                                            objectFit='cover'
+                                            src={e.album_image} />
+                                    </Center>
+                                    <Text >Album Name : {e.name}</Text>
+                                    <Text>Artist Name : {e.artist_name}</Text>
+                                    <Text>Genre: {e.genre}</Text>
+                                    <Text>Year: {e.year}</Text>
+                                    <Text>Number of songs: {e.songs.length}</Text>
+
+                                </SimpleGrid >
+                            ))}
+                        </SimpleGrid>
+                    </Box>
                 </Box>
             </Center>
             <Flex
@@ -107,7 +216,10 @@ const Guest: FC = () => {
             >
                 <Text>Total Pages : {pages}</Text>
                 <Button
-                    onClick={() => setPage(prev => prev - 1)}
+                    onClick={() => {
+                        setPage(prev => prev - 1)
+
+                    }}
                     disabled={page === 1}
                 >
                     Prev
@@ -118,8 +230,9 @@ const Guest: FC = () => {
                         <Button
                             onClick={() => {
                                 setPage(e)
+                                // navigate(`${page}`)
+
                             }}
-                        // disabled={prev = prev}
 
                         >{e}</Button>
                     </Box>
