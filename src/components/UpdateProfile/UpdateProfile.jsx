@@ -69,12 +69,12 @@ const UpdateProfile = () => {
                         <FormControl >
                             <FormControl id="email">
                                 <FormControl>Email</FormControl>
-                                {/* <Input
+                                <Input
                                     type="email"
                                     ref={emailRef}
                                     defaultValue={currentUser.email}
                                     placeholder="Enter the email address"
-                                /> */}
+                                />
                             </FormControl>
                             <FormControl id="password">
                                 <FormLabel>Password</FormLabel>
